@@ -1,6 +1,6 @@
 # gizyHelpBoard
 > Tablica pomocnicza wyświetlająca wartości zmiennych js.  
->Helper for shoving var in JS!
+
 
 ## Table of contents
 * [General info](#general-info)
@@ -20,26 +20,26 @@ Tablica pomocnicza umożliwiająca podgląd wartości zmiennych używanych we w�
 * Html
 
 ## Setup
-import {
-    HelpInfo, HelpBoard, HelpFields, HelpButton,
-    HelpStoper, helpValue, HelpToolsMenu, GizyWindow, HelpCheckButton, HelpInfoList
-} from "../myHelpBoard/gizyBoard";
+import {  
+    HelpInfo, HelpBoard, HelpFields, HelpButton,  
+    HelpStoper, HelpCheckButton, HelpInfoList  
+} from "../myHelpBoard/gizyBoard";  
 
 
-let gBoard = new HelpBoard('Tablica');
-let bBtn = new HelpButton('Uruchom', function_name);
-let gInfo = new HelpInfo('Info');
-let gStoper = new HelpStoper('Stoper');
-let gFields = new HelpFields('Pola');
-let gInfoList = new HelpInfoList('Lista');
-let gCheckButton = new HelpCheckButton('Check', function_name);
+let gBoard = new HelpBoard('Tablica');  
+let bBtn = new HelpButton('Uruchom', function_name);  
+let gInfo = new HelpInfo('Info');  
+let gStoper = new HelpStoper('Stoper');  
+let gFields = new HelpFields('Pola');  
+let gInfoList = new HelpInfoList('Lista');  
+let gCheckButton = new HelpCheckButton('Check', function_name);  
 
-gBoard.add(bBtn);
-gBoard.add(gInfo);
-gBoard.add(gStoper);
-gBoard.add(gFields);
-gBoard.add(gInfoList);
-gBoard.add(gCheckButton);
+gBoard.add(bBtn);  
+gBoard.add(gInfo);  
+gBoard.add(gStoper);  
+gBoard.add(gFields);  
+gBoard.add(gInfoList);  
+gBoard.add(gCheckButton);  
 
 Describe how to install / setup your local environement / add link to demo version.
 
@@ -58,7 +58,7 @@ To-do list:
 * Wow improvement to be done 2
 
 ## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
+Project is: _in progress_, not tested
 
 ## Inspiration
 Add here credits. Project inspired by..., based on...
