@@ -84,6 +84,7 @@ gInfoList.addV('nowa_wart');    // dodanie kolejnej wartości
 
 ## Features
 __List of features ready and TODOs for future development__
+
 * tablica z możliwością podglądu zmiennych poprzez dodawane moduły
   - możliwość przenoszenia w dowolne miejsce
   - możliwość tworzenia kilku instancji
