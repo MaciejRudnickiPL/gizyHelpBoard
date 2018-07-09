@@ -7,6 +7,7 @@ let config = {
         clearAfterRestart: true,// po wczytaniu dane kasowane
         moveNewWindow: {x: 20, y: -20},// o ile mają być przesunięte nowe okna
         cssPath: 'assets\\myHelpBoard\\gizyBoardCss.css',
+        transparentBody: true,
         
     }
 ;
@@ -266,7 +267,7 @@ function HelpObject() {
         buttonsTab.classList.toggle('gizyHideElement');
     };
     this.getMini = function (idElelemnt) {
-        let mini = '<div id="' + idElelemnt + 'mini' + '" class="gizyMiniBtn"></div>';
+        let mini = '<div id="' + idElelemnt + 'mini' + '" class="gizyMiniBtn">+</div>';
         myEvents.addEvent(idElelemnt + 'mini', 'click', this.showToolsButtons.bind(this, idElelemnt));
         return mini;
     };
@@ -337,7 +338,7 @@ function HelpBoard(name) {
     let gwConfig = new GizyWindow('Config: ' + this.boardName);
     let checkSavePosition;
     
-    this.option.class = 'gizyHObj gizyHBoard';
+    this.option.class = 'gizyHObj';
     this.add = function (helpObject) {
         if (!this.isShow) {
             
@@ -361,21 +362,28 @@ function HelpBoard(name) {
         this.isShow = true;
         
         myBody.setPositiom(this.config.position, 'px');
+        
+        if (this.config.transparentBody) {
+            this.myDiv.style.opacity = '0.7';
+        } else {
+            this.myDiv.style.opacity = '1';
+        }
     };
     this.addTools = function () {
         let optT = new HelpOptions();
         optT.class = 'gizyHObj gizyTools';
         
-        let btnSave = new HelpToolsButton('mrConfig', this.saveConfigWindow.bind(this));
-        btnSave.option.class = 'gizyToolsBtn';
         
-        let btnShow = new HelpToolsButton('mrShow', this.infoShow.bind(this));
+        let btnSaveConfig = new HelpToolsButton('Konfig', this.saveConfigWindow.bind(this));
+        btnSaveConfig.option.class = 'gizyToolsBtn  1';
+        
+        let btnShow = new HelpToolsButton('Pokaż', this.infoShow.bind(this));
         btnShow.option.class = 'gizyToolsBtn';
         
-        let btnClear = new HelpToolsButton('mrHelp', this.help.bind(this));
+        let btnClear = new HelpToolsButton('Pomoc', this.help.bind(this));
         btnClear.option.class = 'gizyToolsBtn';
         
-        let myTools = divWarp(btnSave.get() + btnShow.get() + btnClear.get(), optT);
+        let myTools = divWarp(btnSaveConfig.get() + btnShow.get() + btnClear.get(), optT);
         this.myDiv.insertAdjacentHTML('beforeend', myTools);
     };
     
@@ -419,7 +427,7 @@ function HelpBoard(name) {
         this.addDataConfig(myData, event.srcElement.checked);//todo: ???srcElement ??
     };
     
-    this.checkChangeMini = function (myData, event) {
+    this.transparentBodyChange = function (myData, event) {
         this.addDataConfig(myData, event.srcElement.checked);//todo: ???srcElement ??
     };
     
@@ -471,7 +479,7 @@ function HelpBoard(name) {
             }
             gwConfig.addContent(checkLoadPosition.get());
             
-            checkMini = new HelpCheckButton('Miniaturka', this.checkChangeMini.bind(this, 'miniBoard'));
+            checkMini = new HelpCheckButton('Przezroczystość', this.transparentBodyChange.bind(this, 'transparentBody'));
             if (this.config.miniBoard) {
                 checkMini.checked = 'checked'
             } else {
@@ -522,6 +530,8 @@ function HelpBoard(name) {
         if (this.config.clearAfterLoad) {
         
         }
+        
+        
     };
     
     this.saveConfig = function () {
@@ -640,8 +650,6 @@ function GizyWindow(title) {
         let option = new HelpOptions();
         option.class = 'gizyWindowContent';
         option.id = getMyId('contentWin');
-        
-        
         return divWarp(content, option);
     };
     
@@ -671,7 +679,6 @@ function GizyWindow(title) {
     this.getPosition = function () {
         let posX = parseInt(this.myDiv.style.left);
         let posY = parseInt(this.myDiv.style.top);
-        
         return {x: posX, y: posY}
     };
     
@@ -682,7 +689,6 @@ function GizyWindow(title) {
         
         return size;
     };
-    
     
     this.setSize = function (width, height) {
         this.myDiv.style.width = width;
@@ -774,7 +780,6 @@ function HelpCheckButton(text, myFunction) {
         
     };
     
-    
     this.getText = function () {
         return this.option.text + ' : ' + this.option.value;
     };
@@ -801,8 +806,6 @@ function HelpCheckButton(text, myFunction) {
         this.option.value = value;
         document.getElementById(this.option.id + '_val').checked = value;
     };
-    
-    
 }
 
 HelpToolsButton.prototype = new HelpObject();
@@ -831,8 +834,6 @@ function HelpToolsButton(text, myFunction) {
         let content = divWarp(this.option.text, options);
         myEvents.addEvent(this.option.id, 'click', this.option.myFunction);
         return divWarp(content, this.option);
-        
-        
     };
 }
 
@@ -858,7 +859,6 @@ function HelpStoper(text) {
         document.getElementById(this.option.id + '_timeValue').innerText = this.myTime + ' ms';
     };
     
-    
     this.getText = function () {
         return this.option.text + ' czas:' + this.myTime + ' ms';
     };
@@ -875,14 +875,13 @@ function HelpStoper(text) {
         this.option.class = 'gizyHObj gizyHStoper';
         let options = new HelpOptions();
         
-        
         options.class = 'gizyValueField';
         options.id = this.option.id + '_timeValue';
         options.cssAdd = 'width: 100%;';
         let timeFieldValue = divWarp('??:??', options);
         
         options.class = 'gizyTextField';
-        options.cssAdd = 'width: auto;';
+        options.cssAdd = 'width: auto;  background-color: var(--back-collor-info);';
         options.id = this.option.id + '_timeText';
         let timeFieldText = divWarp('Czas:', options);
         
@@ -892,11 +891,8 @@ function HelpStoper(text) {
         
         options.id = this.option.id + '_txt';
         options.class = 'gizyHObj gizyHInfo';
-        let nameText = divWarp(this.option.text, options);
         
-        
-        return divWarp(this.getMini(this.option.id) + nameText + stoperTime + this.addToolsButtons(text), this.option);
-        
+        return divWarp(this.getMini(this.option.id) + divWarp(this.option.text, options) + stoperTime + this.addToolsButtons(text), this.option);
     };
     
     
@@ -917,6 +913,7 @@ function HelpFields(text) {
         this.changeValue(value);
     };
     this.option.class = 'gizyHObj gizyHValueField';
+    this.option.cssAdd = 'height: 21px;';
     this.option.type = helpValue.type.field;
     this.changeValue = function (text) {
         document.getElementById(this.option.id + '_val').innerText = text;
@@ -932,12 +929,12 @@ function HelpFields(text) {
         let options = new HelpOptions();
         options.class = 'gizyTextField';
         options.id = this.option.id + '_txt';
-        options.cssAdd = 'justify-content: flex-end;width: 50%;';
+        options.cssAdd = 'height:17px; justify-content: flex-end;width: 50%; background-color: var(--back-collor-info);';
         
-        let field = divWarp(this.option.text, options);
+        let field = divWarp(this.option.text + ':', options);
         
         options.class = 'gizyValueField';
-        options.cssAdd = 'justify-content: flex-start;width: 50%;';
+        options.cssAdd = 'height:17px; justify-content: flex-start;width: 50%; ';
         options.id = this.option.id + '_val';
         let value = divWarp(this.option.value, options);
         
