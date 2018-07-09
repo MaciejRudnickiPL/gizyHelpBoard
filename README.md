@@ -1,5 +1,6 @@
 # gizyHelpBoard
 > Tablica pomocnicza wyświetlająca wartości zmiennych js.  
+Enaglish after finishing.
 
 
 ## Table of contents
@@ -17,6 +18,8 @@ Tablica umożliwia:
 * uruchamianie funkcji js
 * wyświetlanie wartości zmiennych js
 * odczyt i zapis zmiennych
+* zapis położenia okna 
+* konfigurator
 
 ## Technologies
 * ES6
@@ -25,9 +28,8 @@ Tablica umożliwia:
 
 ## Setup
 import {  
-    HelpInfo, HelpBoard, HelpFields, HelpButton,  
-    HelpStoper, HelpCheckButton, HelpInfoList  
-} from "../myHelpBoard/gizyBoard";  
+    HelpInfo, HelpBoard, HelpFields, HelpButton, HelpStoper, HelpCheckButton, HelpInfoList  
+} from "../gizyBoard";  
 
 
 let gBoard = new HelpBoard('Tablica');  
@@ -63,8 +65,18 @@ let gStoper = new HelpStoper('Stoper');  //utworzenie (nazwa)
 gBoard.add(gStoper); //dodanie do tablicy  
 gStoper.start(); //rozpoczęcie odliczania  
 gStoper.stop();  //zakończenie odliczania   
-* HelpInfo - wyswietlanie opisu i zmiennej w tym zawartości tablic i obiektów.
-
+* HelpInfo - wyswietlanie opisu i zmiennej w tym zawartości tablic i obiektów.  
+let gInfo = new HelpInfo('Info'); //utworzenie (nazwa)  
+gBoard.add(gInfo); //dodanie do tablcy  
+gInfo.setV(array_Object);  //wyświetlenie zmiennej  
+* HelpFields - mini pole do wyświetlania wartości pojedyńczych zmiennych  
+let gFields = new HelpFields('Pola'); //utworzenie (nazwa)  
+gBoard.add(gFields); //dodanie do tablcy  
+gFields.setV('nowa_wartosc'); //wyświetlenie zmiennej  
+* HelpInfoList - pole zmiennych numerujące poszczególne zmiany zmiennej  
+let gInfoList = new HelpInfoList('Lista');  
+gBoard.add(gInfoList); //dodanie do tablcy  
+gInfoList.addV('nowa_wart'); // dodanie kolejnej wartości  
 
 
 ## Features
