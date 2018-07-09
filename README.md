@@ -1,6 +1,6 @@
 # gizyHelpBoard
 > Panel pomocniczy wyświetlający wartości zmiennych js w mini modułach tekstowych. Zawartość panelu konfigurowalna poprzez dodawanie poszczególnych modułów. Skrypt napisany w ES6 jako element nauki programowania w JavaScript. 
-English version of the descriptions after finishing.
+__English version of the descriptions after finishing.__
 
 
 ## Table of contents
@@ -14,6 +14,7 @@ English version of the descriptions after finishing.
 
 ## General info
 Panel pomocniczy wyświetlający wartości zmiennych js w mini modułach tekstowych. Zawartość panelu konfigurowalna poprzez dodawanie poszczególnych modułów. 
+
 Panel umożliwia: 
 * uruchamianie funkcji js 
 * wyświetlanie wartości zmiennych js
@@ -23,6 +24,7 @@ Panel umożliwia:
 * ES6
 * CSS
 * Html
+* --> Chrome
 
 ## Setup
 ```
@@ -85,15 +87,15 @@ gInfoList.addV('nowa_wart');    // dodanie kolejnej wartości
 ## Features
 __List of features ready and TODOs for future development__
 
-* tablica z możliwością podglądu zmiennych poprzez dodawane moduły
+> tablica z możliwością podglądu zmiennych poprzez dodawane moduły
   - możliwość przenoszenia w dowolne miejsce
   - możliwość tworzenia kilku instancji
   - wyświetlanie wszystkich zapisanych danych
   - usuwanie wszystkich zapisanych danych
   
-* moduł przycisku uruchamiający przypisane funkcje
+> moduł przycisku uruchamiający przypisane funkcje
 
-* moduł wyświetlania zmiennych
+> moduł wyświetlania zmiennych
   - wyświetlanie wartości zmiennych
   - zmiana nazwy
   - przypisanie nowej wartości
@@ -101,27 +103,28 @@ __List of features ready and TODOs for future development__
   - dodawanie komentrzay do wyników
   - odczyt wyników
   
-* moduł wyświetlania tablic i obiektów
+> moduł wyświetlania tablic i obiektów
   - wyświetlanie zawartości tablic i obiektów
   - przypisanie nowych wartości
   - zapis wyników
   - dodawanie komentarzy do wyników
   - odczyt wyników
   
-* moduł listy zmiennych
+> moduł listy zmiennych
   - wyświetlanie wartości zmiennych w numerowanej liście
   - zapis zmiennych
   - usuwanie zmiennych
   - dodawnie komentarzy do zmiennych
   
-* moduł stopera
+> moduł stopera
   - rozpoczęcie pomiaru czasu  
   - zakończenie pomiaru czasu  
   - zapis wyników  
   - dodawanie komentarzy do wyników  
   - odczyt wyników  
   - usuwanie zapisu danych stopera  
-* konfiguracja modułu
+  
+> konfiguracja modułu
   - zapis miejsca wyświetlania  
   - odczyt miejsca wyświetlania  
   - odawanie daty do nazwy zmiennej  
@@ -129,7 +132,9 @@ __List of features ready and TODOs for future development__
 
 To-do list:
 * HelpInfo - dodanie rekurencji 
-* Wow improvement to be done 2
+* wyczyść po restarcie
+* przezroczystość on/off
+* testy na innych przeglądarkach 
 
 ## Status
 Projekt w trakcie testów.
