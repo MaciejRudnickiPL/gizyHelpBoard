@@ -1,5 +1,5 @@
 # gizyHelpBoard
-> Tablica pomocnicza wyświetlająca wartości zmiennych js.  
+> Panel pomocniczy wyświetlający wartości zmiennych js w mini modułach tekstowych. Zawartość panelu konfigurowalna poprzez dodawanie poszczególnych modułów.
 English version of the descriptions after finishing.
 
 
@@ -13,9 +13,9 @@ English version of the descriptions after finishing.
 * [Contact](#contact)
 
 ## General info
-Tablica pomocnicza umożliwiająca podgląd wartości zmiennych używanych we własnym kodzie js.   
-Tablica umożliwia: 
-* uruchamianie funkcji js
+Panel pomocniczy wyświetlający wartości zmiennych js w mini modułach tekstowych. Zawartość panelu konfigurowalna poprzez dodawanie poszczególnych modułów. 
+Panel umożliwia: 
+* uruchamianie funkcji js 
 * wyświetlanie wartości zmiennych js
 * odczyt i zapis zmiennych
 * zapis położenia okna 
@@ -30,7 +30,6 @@ Tablica umożliwia:
 import {  
     HelpInfo, HelpBoard, HelpFields, HelpButton, HelpStoper, HelpCheckButton, HelpInfoList  
 } from "../gizyBoard";  
-
 
 let gBoard = new HelpBoard('Tablica');  
 let bBtn = new HelpButton('Uruchom', function_name);  
@@ -53,36 +52,37 @@ Describe how to install / setup your local environement / add link to demo versi
 * HelpBoard - tablica 
 let gBoard=new HelpBoard('nazwa_tablicy');   
 
-* HelpButton - przycisk umozliwiający uruchomienie własnych funkcji js  
-let bBtn = new HelpButton('Uruchom', function_name);  // utworzenie - (opis przycisku, nazwa funkcji do uruchomienia bez nawiasów)  
-gBoard.add(gBtn);   // dodanie do tablicy  
-* HelpFields - pole informacyjne wyświetlające opis i wartość zmiennej  
-let gFields = new HelpFields('Opis_zmiennej');  // utworzenie  (opis zmiennej)  
-gBoard.add(gFields);  //dodanie do tablicy  
-gFields.setV('nowa_wartosc');  //zmiana wyświetlanej wartości  
-* HelpStoper - umozliwiający odliczanie czasu między wykonanymi zadaniami  
-let gStoper = new HelpStoper('Stoper');  //utworzenie (nazwa)  
-gBoard.add(gStoper); //dodanie do tablicy  
+* HelpButton - moduł przycisk umożliwiający uruchomienie własnych funkcji js  
+let bBtn = new HelpButton('Uruchom', function_name);     // utworzenie - (opis przycisku, nazwa funkcji do uruchomienia bez nawiasów)  
+gBoard.add(gBtn);   // dodanie do panelu 
+* HelpFields - moduł pole informacyjne wyświetlające opis i wartość zmiennej  
+let gFields = new HelpFields('Opis_zmiennej');     // utworzenie  (opis zmiennej)  
+gBoard.add(gFields);  // dodanie do panelu  
+gFields.setV('nowa_wartosc');  // zmiana wyświetlanej wartości  
+* HelpStoper - moduł stopera umożliwiający odliczanie czasu między wykonanymi zadaniami  
+let gStoper = new HelpStoper('Stoper');     // utworzenie (nazwa)  
+gBoard.add(gStoper); // dodanie do panelu  
 gStoper.start(); //rozpoczęcie odliczania  
 gStoper.stop();  //zakończenie odliczania   
 * HelpInfo - wyswietlanie opisu i zmiennej w tym zawartości tablic i obiektów.  
-let gInfo = new HelpInfo('Info'); //utworzenie (nazwa)  
-gBoard.add(gInfo); //dodanie do tablcy  
-gInfo.setV(array_Object);  //wyświetlenie zmiennej  
-* HelpFields - mini pole do wyświetlania wartości pojedyńczych zmiennych  
-let gFields = new HelpFields('Pola'); //utworzenie (nazwa)  
-gBoard.add(gFields); //dodanie do tablcy  
-gFields.setV('nowa_wartosc'); //wyświetlenie zmiennej  
+let gInfo = new HelpInfo('Info');    //utworzenie (nazwa)  
+gBoard.add(gInfo);    // dodanie do panelu 
+gInfo.setV(array_Object);    // wyświetlenie zmiennej  
+* HelpFields - moduł mini pola do wyświetlania wartości pojedynczych zmiennych  
+let gFields = new HelpFields('Pola');    //utworzenie (nazwa)  
+gBoard.add(gFields);    // dodanie do tablicy  
+gFields.setV('nowa_wartosc');    //wyświetlenie zmiennej  
 * HelpInfoList - pole zmiennych numerujące poszczególne zmiany zmiennej  
 let gInfoList = new HelpInfoList('Lista');  
-gBoard.add(gInfoList); //dodanie do tablcy  
-gInfoList.addV('nowa_wart'); // dodanie kolejnej wartości  
+gBoard.add(gInfoList);    // dodanie do tablicy  
+gInfoList.addV('nowa_wart');    // dodanie kolejnej wartości  
 
 
 ## Features
 List of features ready and TODOs for future development
-* tablica z możliwością podglądu zmiennych 
-* przycisk 
+* tablica z możliwością podglądu zmiennych poprzez dodawane moduły
+* moduł przycisku uruchamiający przypisane funkcje
+* 
 * Awesome feature 3
 
 To-do list:
@@ -94,3 +94,5 @@ Projekt w trakcie testów.
 
 ## Contact
 Created by [maciejrudnickipl@gmail.com] - feel free to contact me!
+
+
