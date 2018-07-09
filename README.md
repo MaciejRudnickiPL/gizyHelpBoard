@@ -1,6 +1,6 @@
 # gizyHelpBoard
 > Tablica pomocnicza wyświetlająca wartości zmiennych js.  
-Enaglish after finishing.
+English version of the descriptions after finishing.
 
 
 ## Table of contents
@@ -81,8 +81,8 @@ gInfoList.addV('nowa_wart'); // dodanie kolejnej wartości
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
+* tablica z możliwością podglądu zmiennych 
+* przycisk 
 * Awesome feature 3
 
 To-do list:
