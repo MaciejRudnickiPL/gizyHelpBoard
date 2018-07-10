@@ -21,7 +21,7 @@ var _typeof =
         showVarText: !0,
         clearAfterRestart: !0,
         moveNewWindow: { x: 20, y: -20 },
-        cssPath: "myHelpBoard\\gizyBoardCss.css",
+        cssPath: "build\\gizyBoardCss.css",
         transparentBody: !0
     },
     helpValue = {
