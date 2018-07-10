@@ -306,7 +306,7 @@ function HelpBoard(a) {
     isEmpty(a) || (this.boardName = a),
     isEmpty(this.option.id) && (this.option.id = getMyId("idBoard"));
     var b = new GizyWindow(this.boardName),
-        d = new GizyWindow("Pomoc GW"),
+        d = new GizyWindow("Pomoc GW "),
         f = new GizyWindow("Wszystkie dane:"),
         g = new GizyWindow("Config: " + this.boardName),
         h;
