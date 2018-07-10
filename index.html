@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>gizyHelpBoard</title>
+    <meta charset="UTF-8">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link rel="stylesheet" href="css.css" type="text/css">
+    <script type="text/javascript" src="myHelpBoard/gizyBoard.js"></script>
+</head>
+
+<body>
+<header class="heder">
+
+
+</header>
+
+
+<main>
+    <div class="wrap">
+        <div class="c">
+            <code>
+        <pre>
+
+        // DEFINICJA PANELU
+        var board = new HelpBoard('myBoard');
+
+        // DEFINICJA MODUŁÓW
+        var info = new HelpInfo('Info');                 // definicja modułu wyświetlającego zmienne
+        var field = new HelpFields('Pole');              // definicja modułu wyświetlającego zmienne, obiekty i tablice
+        var stoper = new HelpStoper('Stoper');           // definicja modułu wyświetlającego stoper
+        var list = new HelpInfoList('Lista');            // definicja modułu wyświetlającego numerowaną listę zmiennych
+        var btn = new HelpButton('Test Btn', testBtn);   // definicja przycisku uruchamiającego funkcje
+
+        // DODAWANIE MODUŁÓW DO PANELU
+        board.add(info);
+        board.add(field);
+        board.add(stoper);
+        board.add(list);
+        board.add(btn)
+
+         //TESTY ----------------------------------------------------------------------------------------------------------------
+
+        //DEFINICJA PRZYCISKÓW DO TESTOWAANIA PANELU
+        var btnInfoTest = new HelpButton('Test Info', testInfo);
+        var btnFieldsTest = new HelpButton('Test Field', testField);
+        var btnStoperTest = new HelpButton('Test stoper', testStoper);
+        var btnListTest = new HelpButton('Test list', testList);
+
+        // DODAWANIE PRZYSKÓW DO PANELU
+        board.add(btnInfoTest);
+        board.add(btnFieldsTest);
+        board.add(btnStoperTest);
+        board.add(btnListTest);
+
+        // TESTOWE FUNCKJE DO WYWOŁYWANIA ---------------------------------------------------------------------------------------
+        function testBtn() {
+        alert('testBtn function - run');
+        }
+
+        function testStoper() {
+        stoper.start();
+        stoper.stop();
+        }
+
+        function testInfo() {
+        info.setV('set New value')
+        }
+
+        function testList() {
+        list.addV('add new Value1');
+        list.addV('add new Value2');
+        list.addV('add new Value3');
+        }
+
+        function testField() {
+        field.setV('set New Value');
+        }
+        </pre>
+
+            </code>
+        </div>
+    </div>
+</main>
+
+<footer>
+
+
+</footer>
+</body>
+
+
+<script type="application/ecmascript">
+
+    var board = new HelpBoard('myBoard');
+    var info = new HelpInfo('Info');
+    var field = new HelpFields('Pole');
+    var stoper = new HelpStoper('Stoper');
+    var list = new HelpInfoList('Lista');
+    var btn = new HelpButton('Test Btn', testBtn);
+
+    board.add(info);
+    board.add(field);
+    board.add(stoper);
+    board.add(list);
+    board.add(btn);
+
+    var btnInfoTest = new HelpButton('Test Info', testInfo);
+    var btnFieldsTest = new HelpButton('Test Field', testField);
+    var btnStoperTest = new HelpButton('Test stoper', testStoper);
+    var btnListTest = new HelpButton('Test list', testList);
+
+    board.add(btnInfoTest);
+    board.add(btnFieldsTest);
+    board.add(btnStoperTest);
+    board.add(btnListTest);
+
+
+    function testBtn() {
+        alert('testBtn function - run');
+    }
+
+    function testStoper() {
+        stoper.start();
+        stoper.stop();
+    }
+
+    function testInfo() {
+        info.setV('set New value')
+    }
+
+    function testList() {
+        list.addV('add new Value1');
+        list.addV('add new Value2');
+        list.addV('add new Value3');
+    }
+
+    function testField() {
+        field.setV('set New Value');
+    }
+
+</script>
