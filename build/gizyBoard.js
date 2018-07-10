@@ -22,7 +22,7 @@ var _typeof =
         clearAfterRestart: !0,
         moveNewWindow: { x: 20, y: -20 },
         cssPath: "build\\gizyBoardCss.css",
-        transparentBody: !0
+        transparentBody: !1
     },
     helpValue = {
         type: {
