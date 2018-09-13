@@ -1,213 +1,307 @@
-import {Tools} from './js_tools';
-
-import {
-    HelpInfo, HelpBoard, HelpFields, HelpButton,
-    HelpStoper, helpValue, HelpToolsMenu, GizyWindow, HelpCheckButton, HelpInfoList
-} from "../myHelpBoard/gizyBoard";
-
-
-var tools = new Tools();
-
-document.addEventListener("DOMContentLoaded", function () {
-    
-    if (window.location.pathname === '/galeria') {
-        myEvent();
-    }
-});
-
-let gBoard = new HelpBoard('Tablica');
-let bBtn = new HelpButton('test', test);
-let gInfo = new HelpInfo('Info');
-let gStoper = new HelpStoper('Stoper');
-let gFields = new HelpFields('Pola');
-let gInfoList = new HelpInfoList('Lista');
-let gCheckButton = new HelpCheckButton('Check', galleryStart);
-
-
-gBoard.add(bBtn);
-gBoard.add(gInfo);
-gBoard.add(gStoper);
-gBoard.add(gFields);
-gBoard.add(gInfoList);
-// gBoard.add(gCheckButton);
-
-
-gInfo.setV('nowa_wartosć');
-gStoper.start();
-gFields.setV('nowa_wartosc');
-
-gInfoList.addV('nowa_wart1'); gInfoList.addV('nowa_wart2');
-
-
-gStoper.stop();
-
-function myEvent() {
-    let img = document.getElementsByClassName("galleryDivImage");//nasłuch dla wszystkich zdjęć pionowychw galleri
-    for (let x = 0; x < img.length; x++) {
-        img[x].addEventListener('click', galleryStart, true);
-    }
+.gizyHObj {
+    color: black;
+    margin: 6px 0 0 0;
+    padding: 0 5px 3px 5px;
+    /*display: table;*/
+    box-sizing: border-box;
+    background-color: #d8d8d8;
+    /*width: 80%;*/
+    height: auto;
+    font-family: Arial;
+ }
+ .gizyHBoard {
+     text-align: center;
+    height: auto;
+    min-height: 100px;
+    border: solid 1px gray;
+    position: absolute;
+    top: 20px;
+    Left: 20px;
+    width: 200px;
 }
-
-var galOptions = {
-    font: 'Arial, Verdana, sans-serif',
-    colors: {
-        back: 'white',
-        actualImgBorder: 'red'
-    },
-    settings: {
-        maxWitdhImg: 0,
-        maxHighImg: 0
-    },
-    
-    
-};
-
-function test() {
-    gInfoList.addV('lista');
+ .gizyHButton {
+    font-size: 0.6rem;
+    text-align: center;
+    width: 100%;
+    float: left;
+    position: relative;
+    background-color: #7892c2;
+    border: 1px solid #4e6096;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 6px 12px;
+    text-decoration: none;
 }
-
-
-function GalMiniImg() {
-    this.imgIndex = 0;
-    this.imgUrl = null;
-    this.imgFull = null;
-    this.imgInfo = null;
-    this.divIndex = null;
+ .gizyHButton:hover {
+    background-color: #476e9e;
 }
-
-function Gall(galOptions) {
-    this.data = {
-        currentImageID: 0,
-        allImgInfo: [],
-        tab: {
-            tabImgList: [],
-            tabSize: 0,// szerokość tablicy mini zdjęć
-            tabActualSize: 0,//suma aktualnie dodanych do tablicy zdjęc
-        },
-        
-    };
-    
-    this.elements = {
-        galAll: document.getElementById('idMyGallery'),// cała galeria
-        imgBig: '',// duzy podgląd
-        tab: document.getElementById('id_galleryMiniImgAll'),// mini galeria bez prawo lewo
-        miniImgTemplate: document.getElementById('id_galleryMini'),//wygląd zdjęcia w minigaleri
-    };
+ .gizyHButton:active {
+    top: 1px;
 }
-
-Gall.prototype = {
-    myTest: function () {
-        
-    },
-    //pobieranie danych na podstawie podglądów zdjęć
-    allGaleryPrieviewImg: function () {
-        let imgPreView = document.getElementsByClassName('galleryDivImage');
-        if (imgPreView) {
-            for (let i = 0; i < imgPreView.length; i++) {
-                let divs = imgPreView[i].getElementsByClassName('imgShow');
-                let fullPath = divs[0].src;
-                let fileName = fullPath.replace(/\\/g, '/').replace(/.*\//, '');
-                let path = fullPath.replace(fileName, '');
-                
-                let gm = new GalMiniImg();
-                gm.imgUrl = fullPath;
-                gm.imgFull = path + fileName;
-                gm.imgInfo = imgPreView[i].dataset.textInfo;
-                gm.imgIndex = i;
-                this.data.allImgInfo[i] = gm;
-            }
-        }
-    },
-    
-    addEvent: function () {
-        document.getElementById('IDgalleryClose').addEventListener('click', this.visableGallery, false);
-        document.getElementById('IDgalleryMiniArrowLeft').addEventListener('click', this.imgLeft, false);
-        document.getElementById('IDgalleryMiniArrowRight').addEventListener('click', this.imgRight, false);
-        document.getElementById('IDgalleryArrowRight').addEventListener('click', this.imgRight, false);
-        document.getElementById('IDgalleryArrowLeft').addEventListener('click', this.imgLeft, false);
-    },
-    
-    tabImgFill: function () {
-        this.data.allImgInfo.forEach((imgToAdd) => {
-            let img = this.getImgMiniGallery(imgToAdd.imgIndex);
-            this.tabImgAddLast(img);
-            
-        });
-        
-        
-    }
-    , imgLeft: function (event) {
-        field.setV('imgLeft');
-        
-    },
-    imgRight: function (event) {
-        field.setV('imgRight');
-        
-    },
-    
-    getImgMiniGallery: function (imgID) {
-        let imgClone = this.elements.miniImgTemplate.cloneNode(true);
-        imgClone.classList.toggle('divHidden');
-        imgClone.getElementsByClassName('galleryMiniImg')[0].src = this.data.allImgInfo[imgID].imgUrl;
-        imgClone.getElementsByClassName('galleryMiniImg')[0].setAttribute('data-imgID', imgID);
-        
-        return imgClone;
-    },
-    tabImgAddFirst: function (imgToAdd) {
-        
-        
-        if (this.tabHasSpace(imgToAdd)) {
-            this.data.tab.tabImgList.push(imgToAdd.getAttribute('data-imgID'));
-            
-        } else {
-            
-        }
-        
-    },
-    tabImgAddLast: function (imgToAdd) {
-        //dodoawanie do tab
-        console.log(imgToAdd);
-        if (this.tabHasSpace(imgToAdd)) {
-            let imgID = imgToAdd.getAttribute('data-imgID');
-            this.data.tab.tabImgList.unshift(imgID);
-            this.elements.tab.appendChild(imgToAdd);
-            imgToAdd.addEventListener('click', this.changeImage, false);
-            
-        } else {
-            console.log('brk miejsca');
-        }
-        
-    },
-    changeImage: function (idImg) {
-    
-    },
-    
-    
-    tabHasSpace: function (elementToAdd) {
-        let val = 0;
-        let elementSize = tools.szerokosc(elementToAdd);
-        return this.data.tab.tabSize > this.data.tab.tabActualSize + elementSize;
-        
-    }, visableGallery: function () {
-        document.getElementById('idMyGallery').classList.toggle('divHidden');
-    },
-    setData: function () {
-        this.elements.imgBig = document.getElementById('idGalleryImg');
-    },
-    
-};
-
-var gal = new Gall(galOptions);
-
-function galleryStart() {
-    gal.allGaleryPrieviewImg();// pobranie listy zdjęć
-    gal.visableGallery();
-    gal.data.tab.tabSize = gal.elements.tab.clientWidth;// początkowy odczyt szerokości tab
-    gal.tabImgFill();// wypełnienie taba mini zdjęciami
-    gal.setData();
-    gal.addEvent();
-    
+ .gizyHStoper {
+    font-size: 0.6rem;
+    float: left;
+    position: relative;
+    background-color: cornflowerblue;
+    border-top: 0;
+    text-align: center;
+    height: 20px;
+    width: 100%;
 }
-
-
-
+ .gizyHInfo {
+    padding: 2px;
+    font-size: 0.6rem;
+    float: left;
+    text-align: center;
+    position: relative;
+    height: auto;
+    width: 100%;
+    background-color: #ff9910;
+}
+ .gizyHInfoValue {
+    padding: 2px;
+    margin: 0;
+    height: auto;
+    float: left;
+    position: relative;
+    background-color: white;
+    font-size: 0.6rem;
+    width: 100%;
+    max-height: 100px;
+    overflow-x: auto;
+}
+ .gizyHCheckButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 0.6rem;
+    float: left;
+    text-align: center;
+    position: relative;
+    height: auto;
+    width: 100%;
+    border: 1px solid #4e6096;
+    box-sizing: border-box;
+    margin: 4px 0 0 0;
+    /*background-color: #ff9910;*/
+}
+ .gizyHCheckButtonField {
+    padding: 2px;
+    float: left;
+    min-height: 15px;
+    position: relative;
+    /*background-color: #7892c2;*/
+    border-right: solid 2px grey;
+    font-size: 0.6rem;
+    width: 80%;
+    box-sizing: border-box;
+}
+ .gizyHCheckButtonValue {
+    margin: 2px;
+    position: relative;
+    font-size: 0.6rem;
+    width: 20%;
+    box-sizing: border-box;
+}
+ .gizyHFields {
+    float: left;
+    padding: 2px;
+    position: relative;
+    height: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid 1px gray;
+}
+ .gizyTextField, .gizyValueField {
+    font-size: 0.6rem;
+    float: left;
+    padding: 2px;
+    position: relative;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+}
+ .gizyValueField {
+    height: auto;
+    background-color: white;
+}
+ .gizyTools {
+    font-size: 0.5rem;
+    float: left;
+    width: 100%;
+    height: auto;
+    /*border: solid 2px darkorange;*/
+    padding: 0;
+    box-sizing: border-box;
+ }
+ .gizyToolsBtn {
+    width: 33.33%;
+    float: left;
+    position: relative;
+    background-color: #d8d8d8;
+    border: 1px solid #9e9e9e;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 1px 2px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+ .gizyToolsBtn:hover {
+    background-color: #898989;
+}
+ .gizyToolsTab {
+     position: absolute;
+    top: -6px;
+    left: -234px;
+    width: 0;
+    height: 0;
+ }
+ .gizyToolsTabBtn {
+    display: flex;
+    font-size: 0.7rem;
+    padding: 2px;
+    position: relative;
+    float: right;
+    height: 14px;
+    width: 35px;
+    background: #f5f5f5;
+    cursor: pointer;
+    border: solid 1px #969696;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+ }
+ .gizyToolsTabBtn:hover {
+    background: #ff9910;
+    border: solid 1px #f5f5f5;
+}
+ .gizyToolsTabValue {
+    padding: 10px;
+    outline: none;
+    width: 200px;
+    height: 38px;
+    border: solid 1px #969696;
+    background: white;
+    font-size: 0.8rem;
+ }
+ .gizyHideElement {
+    display: none !important;
+}
+ .gizyMiniBtn {
+    float: left;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    height: 10px;
+    z-index: 102;
+    width: 10px;
+    background-color: red;
+}
+ .gizyMiniBtn:hover {
+    background-color: #fff203;
+}
+ .gizyCloseBtn {
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 102;
+    height: 10px;
+    width: 20px;
+    padding: 2px;
+    border: 1px solid darkgrey;
+    color: red;
+    font-weight: bold;
+    background-color: #ffe321;
+}
+ .gizyCloseBtn:hover {
+    background-color: #d3b701;
+    height: 30px;
+    width: 40px;
+    cursor: hand;
+}
+ .myPomoc {
+    width: 300px;
+    padding: 10px;
+    text-align: right;
+    height: 30px;
+    float: left;
+    background: yellow;
+}
+ .gizyWindowBar {
+    z-index: 100;
+    cursor: move;
+    text-align: center;
+    float: left;
+    background-color: #88a6dc;;
+    width: 100%;
+    height: 13px;
+    font-size: 0.7rem;
+}
+ .gizyWindowBar:hover {
+    background-color: #4d5d7c;;
+}
+ .gizyWindow {
+    width: 150px;
+    height: auto;
+    padding: 5px;
+    z-index: 100;
+    position: fixed;
+    background-color: gainsboro;
+    border: grey;
+}
+ .gizyWindowContent {
+    width: 100%;
+    height: auto;
+    float: left;
+    box-sizing: border-box;
+    max-height: 400px;
+    overflow-x: auto;
+}
+ .gizyHelpText {
+    font-size: 0.8rem;
+    text-align: left;
+    padding: 2px;
+    font-family: monospace;
+}
+ .gizyListContent {
+    border-bottom: solid 1px lightgray;
+    text-align: left;
+}
+ .gizyListContent:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+ }
+ .gizyTable {
+    border: solid 1px lightgray;
+    width: 100%;
+ }
+ tr:hover {
+    background-color: #c9e3ff;
+}
+ .gizyTable td {
+    padding: 2px;
+    border-right: solid 1px deeppink;
+}
+ .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 103; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
